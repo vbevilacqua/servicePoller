@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import java.sql.Timestamp;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter
@@ -13,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "sites")
+@Entity(name = "poller")
 public class PollerModel {
 
     @Id
@@ -22,4 +24,6 @@ public class PollerModel {
     private String url;
     private String name;
     private boolean alive;
+    private Timestamp createdDate;
+    private Timestamp updatedDate;
 }
