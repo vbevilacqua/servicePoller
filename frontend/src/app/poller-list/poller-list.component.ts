@@ -17,8 +17,12 @@ export class PollerListComponent implements OnInit {
   ngOnInit() {
     this.pollerService.findAll().subscribe(data => {
       this.pollers = data;
-      console.log(data);
     });
   }
 
+  onSubmit(poller) {
+    this.pollerService.refreshStatus(poller.id).subscribe(result => {
+      window.location.reload();
+    }, ({error}) => this.errorMessage = error.reason)
+  }
 }

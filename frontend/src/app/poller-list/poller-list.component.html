@@ -18,6 +18,7 @@
           <td>{{ poller.alive ? "Ok" : "Fail" }}</td>
           <td>{{ poller.createdDate | date:'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>{{ poller.updatedDate | date:'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td><button id="submit" (click)="onSubmit(poller)" type="submit" class="btn btn-info">Update</button></td>
         </tr>
       </tbody>
     </table>
