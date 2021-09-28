@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.vbevilacqua.poller.model.PollerModel;
+import com.vbevilacqua.poller.service.InvalidURLException;
 import com.vbevilacqua.poller.service.PollerService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,6 +59,30 @@ public class PollerControllerTest {
                 .andExpect(jsonPath("$.url", Matchers.is(paramUrl)))
                 .andExpect(jsonPath("$.name", Matchers.is(paramName)))
                 .andExpect(jsonPath("$.alive", Matchers.is(true)));
+    }
+
+
+    @Test
+    @DisplayName("Shouldn't add wrong url")
+    void shouldNotAddWrongUrl() throws Exception {
+        var wrongUrl = "htp://www.google.com";
+        given(pollerService.addURL(wrongUrl, paramName)).willThrow(InvalidURLException.class);
+        String request =  createJsonModel(wrongUrl);
+
+        mockMvc.perform(post(defaultUrl)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code", Matchers.is(404)))
+                .andExpect(jsonPath("$.reason", Matchers.is("URL not found")));
+    }
+
+    private String createJsonModel(String paramUrl) throws JsonProcessingException {
+        PollerModel model = new PollerModel().builder().id(1L).url(paramUrl).name("Google").alive(true).build();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        return ow.writeValueAsString(model);
     }
 
     private String createJsonModel(PollerModel model) throws JsonProcessingException {
