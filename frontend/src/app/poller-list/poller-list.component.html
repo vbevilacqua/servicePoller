@@ -1,0 +1,26 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Url</th>
+          <th scope="col">Status</th>
+          <th scope="col">Created Date</th>
+          <th scope="col">Updated Date</th>
+          <th scope="col">Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let poller of pollers" >
+          <td>{{ poller.name }}</td>
+          <td>{{ poller.url }}</td>
+          <td>{{ poller.alive ? "Ok" : "Fail" }}</td>
+          <td>{{ poller.createdDate | date:'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td>{{ poller.updatedDate | date:'dd/MM/yyyy hh:mm:ss' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div [hidden]="!errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  </div>
+</div>
