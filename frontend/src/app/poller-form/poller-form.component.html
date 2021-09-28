@@ -1,0 +1,25 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #urlForm="ngForm">
+      <div class="form-group">
+        <label for="url">URL</label>
+        <input type="text" [(ngModel)]="poller.url"
+               class="form-control"
+               id="url"
+               name="url"
+               placeholder="Enter url"
+               required #name="ngModel">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="poller.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter name"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+      <div [hidden]="!success" class="alert alert-success">URL added with success</div>
+      <button id="submit" type="submit" [disabled]="!urlForm.form.valid" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
