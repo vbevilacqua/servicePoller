@@ -23,7 +23,7 @@ Use the following command:
 
 
 ## TODO
-- Delete endpoint to delete url
+- Add endpoint to delete url
 - Update CORS to be production grade
 - Put it in a docker container
 - Add multi-user 
