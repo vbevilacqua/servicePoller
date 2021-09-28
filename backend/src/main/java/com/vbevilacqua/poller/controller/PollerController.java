@@ -44,6 +44,7 @@ public class PollerController {
     @CrossOrigin
     @PutMapping
     public ResponseEntity<PollerModel> refreshStatus(@RequestParam(name = "id") Long id) throws IOException {
-        return new ResponseEntity<PollerModel>(pollerService.refreshStatus(id), OK);
+        return new ResponseEntity<PollerModel>(pollerService.updateStatus(id), OK);
     }
+
 }

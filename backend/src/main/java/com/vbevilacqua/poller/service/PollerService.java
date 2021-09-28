@@ -30,7 +30,7 @@ public class PollerService {
     }
 
     @Transactional
-    public PollerModel refreshStatus(Long id) throws IOException {
+    public PollerModel updateStatus(Long id) throws IOException {
         var model = repo.getById(id);
         boolean alive = checkUrlAlive(new URL(model.getUrl()));
         model.setAlive(alive);
