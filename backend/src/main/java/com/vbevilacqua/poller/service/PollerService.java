@@ -42,9 +42,9 @@ public class PollerService {
     private boolean validateURL(String urlString) throws IOException {
         URL url;
         PollerModel result = new PollerModel();
-        try{
+        try {
             url = new URL(urlString);
-            if(checkUrlAlive(url)){
+            if(checkUrlAlive(url)) {
                 result = repo.findByUrl(urlString);
             }
             return result == null;
