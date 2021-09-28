@@ -10,6 +10,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
+@SpringBootTest
 public class PollerControllerTest {
 
     @MockBean
@@ -33,7 +35,7 @@ public class PollerControllerTest {
     @BeforeEach
     void setup() {
         PollerController pollerController = new PollerController(pollerService);
-        mockMvc = standaloneSetup(pollerController).build();
+        mockMvc = standaloneSetup(pollerController).setControllerAdvice(new URLControllerExceptionHandler()).build();
     }
 
     @Test

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -23,12 +24,19 @@ public class PollerService {
     }
 
     public PollerModel addURL(String urlString, String name) throws IOException {
-        if (validateURL(urlString)) {
-            //return persistURL(urlString, name);
-        }
-        else throw new IOException();
+        if (validateURL(urlString)) return persistURL(urlString, name);
+        else throw new InvalidURLException();
+    }
 
-        return new PollerModel();
+    private PollerModel persistURL(String urlString, String name) {
+        PollerModel model = new PollerModel();
+        model.setUrl(urlString);
+        model.setName(name);
+        model.setAlive(true);
+        model.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        model.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
+        repo.save(model);
+        return model;
     }
 
     private boolean validateURL(String urlString) throws IOException {
