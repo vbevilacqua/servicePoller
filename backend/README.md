@@ -1,13 +1,13 @@
-= Backend of Service Poller
+# Backend of Service Poller
 
-== How to run locally
+## How to run locally
 
 Use the following command:
 ```
 ./gradlew clean run
 ```
 
-== How to test
+## How to test
 
 Use the following command:
 ```
@@ -22,7 +22,7 @@ Use the following command:
     - H2
 
 
-== TODO
+## TODO
 - Delete endpoint to delete url
 - Update CORS to be production grade
 - Put it in a docker container
