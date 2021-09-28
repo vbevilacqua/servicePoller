@@ -4,6 +4,7 @@ import com.vbevilacqua.poller.model.PollerModel;
 import com.vbevilacqua.poller.repository.PollerRepo;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -26,6 +27,15 @@ public class PollerService {
     public PollerModel addURL(String urlString, String name) throws IOException {
         if (validateURL(urlString)) return persistURL(urlString, name);
         else throw new InvalidURLException();
+    }
+
+    @Transactional
+    public PollerModel refreshStatus(Long id) throws IOException {
+        var model = repo.getById(id);
+        boolean alive = checkUrlAlive(new URL(model.getUrl()));
+        model.setAlive(alive);
+        model.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
+        return repo.save(model);
     }
 
     private PollerModel persistURL(String urlString, String name) {
