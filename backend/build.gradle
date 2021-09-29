@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+	id 'application'
 }
 
 group = 'com.vbevilacqua'
@@ -31,6 +31,8 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_11
 	targetCompatibility = JavaVersion.VERSION_11
 }
+
+mainClassName = 'com.vbevilacqua.poller.PollerApplication'
 
 test {
 	useJUnitPlatform()
