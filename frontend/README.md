@@ -2,6 +2,10 @@
 
 An angular clean application with hot deploy 
 
+## Installing dependencies
+
+Run `npm install` to install all of the necessary dependencies
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
@@ -19,3 +23,5 @@ Use the `ng build -prod`.
 - Improve error messages
 - Add unit tests
 - Add production configuration  
+- Clear alert before showing another alert
+- When list is empty, show a label to let user know 

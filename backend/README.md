@@ -26,5 +26,6 @@ Use the following command:
 - Add endpoint to delete url
 - Update CORS to be production grade
 - Put it in a docker container
+- Make update automatically so the user doesn't need to trigger
 - Add multi-user 
 - Secure the application
