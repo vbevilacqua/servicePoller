@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.ReflectionUtils;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -42,7 +43,7 @@ public class PollerServiceTest {
 
     @Test
     @DisplayName("Shouldn't add when url has the wrong protocol")
-    public void addURLWrongProtocolTest() throws MalformedURLException {
+    public void addURLWrongProtocolTest() {
         url = "htps://www.google.com";
         Exception exception = assertThrows(MalformedURLException.class, () -> service.addURL(url, name));
         assertEquals(exception.getMessage(), "unknown protocol: htps");
@@ -50,7 +51,7 @@ public class PollerServiceTest {
 
     @Test
     @DisplayName("Shouldn't add when url has the wrong address")
-    public void addURLWrongAddressTest() throws UnknownHostException {
+    public void addURLWrongAddressTest() {
         url = "http://foo.bar";
         Exception exception = assertThrows(UnknownHostException.class, () -> service.addURL(url, name));
         assertEquals(exception.getMessage(), "foo.bar");

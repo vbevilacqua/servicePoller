@@ -63,6 +63,21 @@ public class PollerService {
         }
     }
 
+    private boolean validateURLFixed(String urlString) throws IOException {
+        URL url;
+        PollerModel result;
+        try {
+            url = new URL(urlString);
+            result = repo.findByUrl(urlString);
+            if(result == null)
+                return checkUrlAlive(url);
+             else
+                return false;
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+
     private boolean checkUrlAlive(URL url) throws IOException {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         return conn.getResponseCode() == HttpURLConnection.HTTP_OK;
